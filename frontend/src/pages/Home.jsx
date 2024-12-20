@@ -15,6 +15,8 @@ const Home = () => {
   const [pageNumber, setPageNumber] = useState(0);
   const [numberOfPages, setNumberOfPages] = useState(0);
 
+const pages = new Array(numberOfPages).fill(null).map((v, i) => i);
+
   useEffect(() => {
     setLoading(true);
     axios
@@ -60,6 +62,7 @@ const gotoPrevious = () => {
           <MdOutlineAddBox className='text-sky-800 text-4xl' />
         </Link>
       </div>
+
       {loading ? (
         <Spinner />
       ) : showType === 'table' ? (
@@ -67,8 +70,15 @@ const gotoPrevious = () => {
       ) : (
         <BooksCard books={books} />
       )}
-
+ <button onClick={gotoPrevious}>Previous</button>
+      {pages.map((pageIndex) => (
+        <button key={pageIndex} onClick={() => setPageNumber(pageIndex)}>
+          {pageIndex + 1}
+        </button>
+      ))}
+      <button onClick={gotoNext}>Next</button>
     </div>
+
   );
 };
 
