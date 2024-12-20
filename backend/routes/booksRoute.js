@@ -41,8 +41,8 @@ router.get('/', async (req, res) => {
     .skip(PAGE_SIZE*page);
 
     return res.status(200).json({
-      totalPages: Math.ceil(books.length/PAGE_SIZE),
-      data: books,
+    totalPages: Math.ceil(total / PAGE_SIZE),
+    data: books,
     });
   } catch (error) {
     console.log(error.message);

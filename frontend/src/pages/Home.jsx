@@ -14,16 +14,16 @@ const Home = () => {
   const [showType, setShowType] = useState('table');
   const [pageNumber, setPageNumber] = useState(0);
   const [numberOfPages, setNumberOfPages] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
 
 const pages = new Array(numberOfPages).fill(null).map((v, i) => i);
 
   useEffect(() => {
     setLoading(true);
-    axios
-      .get('http://localhost:5555/books')
+    axios.get('http://localhost:5555/books')
       .then((response) => {
         setBooks(response.data.data);
-        setNumberOfPages(totalPages);
+        setNumberOfPages(response.data.totalPages);
         setLoading(false);
       })
       .catch((error) => {
