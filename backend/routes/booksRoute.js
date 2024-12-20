@@ -31,17 +31,21 @@ router.post('/', async (request, response) => {
 });
 
 // Route for Get All Books from database
-router.get('/', async (request, response) => {
+router.get('/', async (req, res) => {
   try {
-    const books = await Book.find({});
+    const page = parseInt(req.query.page || '0');
+    const total = await Book.countDocuments({});
+    const books = await Book.find({})
+    .limit(10)
+    .skip(10*page);
 
-    return response.status(200).json({
-      count: books.length,
+    return res.status(200).json({
+      count: Math.ceil(books.length/10),
       data: books,
     });
   } catch (error) {
     console.log(error.message);
-    response.status(500).send({ message: error.message });
+    res.status(500).send({ message: error.message });
   }
 });
 
