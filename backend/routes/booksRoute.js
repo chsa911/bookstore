@@ -40,7 +40,7 @@ router.get('/', async (req, res) => {
     .skip(10*page);
 
     return res.status(200).json({
-      count: Math.ceil(books.length/10),
+      totalPages: Math.ceil(books.length/10),
       data: books,
     });
   } catch (error) {

@@ -12,6 +12,8 @@ const Home = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showType, setShowType] = useState('table');
+  const [pageNumber, setPageNumber] = useState(0);
+  const [numberOfPages, setNumberOfPages] = useState(0);
 
   useEffect(() => {
     setLoading(true);
@@ -19,13 +21,14 @@ const Home = () => {
       .get('http://localhost:5555/books')
       .then((response) => {
         setBooks(response.data.data);
+        setNumberOfPages(totalPages);
         setLoading(false);
       })
       .catch((error) => {
         console.log(error);
         setLoading(false);
       });
-  }, []);
+  }, [pageNumber]);
 
   return (
     <div className='p-4'>
