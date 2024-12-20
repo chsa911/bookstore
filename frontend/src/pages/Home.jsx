@@ -29,7 +29,13 @@ const Home = () => {
         setLoading(false);
       });
   }, [pageNumber]);
+const gotoPrevious = () => {
+    setPageNumber(Math.max(0, pageNumber - 1));
+  };
 
+  const gotoNext = () => {
+    setPageNumber(Math.min(numberOfPages - 1, pageNumber + 1));
+  };
   return (
     <div className='p-4'>
       <div className='flex justify-center items-center gap-x-4'>
