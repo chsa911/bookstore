@@ -33,14 +33,15 @@ router.post('/', async (request, response) => {
 // Route for Get All Books from database
 router.get('/', async (req, res) => {
   try {
+    const PAGE_SIZE = 2;
     const page = parseInt(req.query.page || '0');
     const total = await Book.countDocuments({});
     const books = await Book.find({})
-    .limit(10)
-    .skip(10*page);
+    .limit(PAGE_SIZE)
+    .skip(PAGE_SIZE*page);
 
     return res.status(200).json({
-      totalPages: Math.ceil(books.length/10),
+      totalPages: Math.ceil(books.length/PAGE_SIZE),
       data: books,
     });
   } catch (error) {
