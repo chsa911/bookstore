@@ -109,5 +109,18 @@ router.delete('/:id', async (request, response) => {
     response.status(500).send({ message: error.message });
   }
 });
+//Route for search a book
+router.get('/', async (request, response) => {
+  try {
+
+    const book = await Book.findById(id);
+
+    return response.status(200).json(book);
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
 
 export default router;
