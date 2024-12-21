@@ -20,7 +20,7 @@ const pages = new Array(numberOfPages).fill(null).map((v, i) => i);
 
   useEffect(() => {
     setLoading(true);
-    axios.get('http://localhost:5555/books?page$(pageNumber)')
+    axios.get('http://localhost:5555/books?page${pageNumber}')
       .then((response) => {
         setBooks(response.data.data);
         setNumberOfPages(response.data.totalPages);
@@ -62,14 +62,20 @@ const gotoPrevious = () => {
           <MdOutlineAddBox className='text-sky-800 text-4xl' />
         </Link>
       </div>
-
+{/*
       {loading ? (
         <Spinner />
       ) : showType === 'table' ? (
         <BooksTable books={books} />
       ) : (
         <BooksCard books={books} />
-      )}
+      )}*/}
+  {books.map((book) => (
+                <div key={book._id} className="book">
+                    <h4>{book.author}</h4>
+                  <p>{book.title}</p>
+                </div>
+              ))}
  <button onClick={gotoPrevious}>Previous</button>
       {pages.map((pageIndex) => (
         <button key={pageIndex} onClick={() => setPageNumber(pageIndex)}>
