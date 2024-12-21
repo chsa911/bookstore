@@ -20,7 +20,7 @@ const pages = new Array(numberOfPages).fill(null).map((v, i) => i);
 
   useEffect(() => {
     setLoading(true);
-    axios.get('http://localhost:5555/books')
+    axios.get('http://localhost:5555/books?page$(pageNumber)')
       .then((response) => {
         setBooks(response.data.data);
         setNumberOfPages(response.data.totalPages);
